@@ -19,14 +19,11 @@ public class jsonDownloader {
     public static JSONObject readJsonFromUrl(String url) throws IOException, JSONException {
         URLConnection connection = new URL(url).openConnection();
         connection.setRequestProperty("Accept", "application/json");
-        InputStream is = connection.getInputStream();
-        try {
+        try (InputStream is = connection.getInputStream()) {
             BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             String line = null;
-            String jsonText =  in.readLine();
+            String jsonText = in.readLine();
             return new JSONObject(jsonText);
-        } finally {
-            is.close();
         }
     }
 
