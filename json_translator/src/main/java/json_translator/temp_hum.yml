@@ -1,0 +1,12 @@
+## YAML Template.
+---
+temperatura:
+    user_id: t178705@mvrht.net
+    sensor_id: 5a37ab4af7806676ddadd0dd
+    desc: temperatura
+    measure_value: key
+wilgotnosc:
+    user_id: t178705@mvrht.net
+    sensor_id: 5a37ab4af7806676ddadd0dd
+    desc: wilgotnosc
+    measure_value: key
