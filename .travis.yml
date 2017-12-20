@@ -1,6 +1,4 @@
 language: java
 sudo: false
 before_script: cd json_translator
-script:
-  mvn clean verify
-  mvn test
+script: mvn clean verify && mvn clean test
