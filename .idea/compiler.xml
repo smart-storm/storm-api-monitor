@@ -12,7 +12,7 @@
     <bytecodeTargetLevel>
       <module name="json_downloader" target="1.5" />
       <module name="json_mapper" target="1.5" />
-      <module name="json_translator" target="1.5" />
+      <module name="json_translator" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
