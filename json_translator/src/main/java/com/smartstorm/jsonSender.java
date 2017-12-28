@@ -4,10 +4,10 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
-import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,18 +21,22 @@ public class jsonSender {
 
     jsonSender() {
         httpclient = HttpClients.createDefault();
-        httppost = new HttpPost("http://alfa.smartstorm.io/api/update");
+        httppost = new HttpPost("http://alfa.smartstorm.io/api/v1/measure");
     }
 
     public void sendValue(String sensor_id, String val) throws IOException {
         // Request parameters and other properties.
-        List<NameValuePair> params = new ArrayList<NameValuePair>(2);
-        params.add(new BasicNameValuePair("user-id","t178705@mvrht.net"));
-        params.add(new BasicNameValuePair("sensor_id", sensor_id));
-        params.add(new BasicNameValuePair("measure_value", val));
-        httppost.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
+        JSONObject j = new JSONObject();
+        j.put("user_id", "t178705@mvrht.net");
+        j.put("sensor_id", "5a37ab4af7806676ddadd0dd");
+        j.put("desc","temp");
+        j.put("measure_value","10.3");
 
-        //Execute and get the response.
+
+        List<NameValuePair> params = new ArrayList<NameValuePair>(2);
+        httppost.setEntity(new StringEntity(j.toString()));
+        httppost.setHeader("Content-type","application/json");
+        //Execute and get the response
         HttpResponse response = httpclient.execute(httppost);
         HttpEntity entity = response.getEntity();
 
@@ -46,16 +50,9 @@ public class jsonSender {
                 instream.close();
             }
         }
-
     }
-
     public static void main(String[] args) throws IOException {
         jsonSender js = new jsonSender();
-        js.sendValue("5a37ab4af7806676ddadd0dd", "10");
-
+        js.sendValue("a","b");
     }
-
-
-
-
 }
