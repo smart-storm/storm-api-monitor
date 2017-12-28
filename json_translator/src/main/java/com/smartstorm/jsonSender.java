@@ -12,6 +12,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -24,17 +25,20 @@ public class jsonSender {
         httppost = new HttpPost("http://alfa.smartstorm.io/api/v1/measure");
     }
 
-    public void sendValue(String sensor_id, String val) throws IOException {
-        // Request parameters and other properties.
-        JSONObject j = new JSONObject();
-        j.put("user_id", "t178705@mvrht.net");
-        j.put("sensor_id", "5a37ab4af7806676ddadd0dd");
-        j.put("desc","temp");
-        j.put("measure_value","10.3");
+    public void sendJsons(JSONObject jsonWithMessages) throws IOException {
+        Iterator<?> keys = jsonWithMessages.keys();
+        String key;
+        while (keys.hasNext()) {
+            key = (String) keys.next();
+            JSONObject singleJson = jsonWithMessages.getJSONObject(key);
+            sendSingleJSON(singleJson);
+        }
+    }
 
 
+    private void sendSingleJSON(JSONObject toSend) throws IOException {
         List<NameValuePair> params = new ArrayList<NameValuePair>(2);
-        httppost.setEntity(new StringEntity(j.toString()));
+        httppost.setEntity(new StringEntity(toSend.toString()));
         httppost.setHeader("Content-type","application/json");
         //Execute and get the response
         HttpResponse response = httpclient.execute(httppost);
@@ -50,9 +54,5 @@ public class jsonSender {
                 instream.close();
             }
         }
-    }
-    public static void main(String[] args) throws IOException {
-        jsonSender js = new jsonSender();
-        js.sendValue("a","b");
-    }
+        }
 }

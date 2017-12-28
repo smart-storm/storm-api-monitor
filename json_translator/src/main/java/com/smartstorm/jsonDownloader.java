@@ -27,12 +27,4 @@ public class jsonDownloader {
             is.close();
         }
     }
-
-    public static void main(String[] args) throws IOException, JSONException {
-        JSONObject json = readJsonFromUrl("https://danepubliczne.imgw.pl/api/data/synop/station/gdansk");
-        //zmieniæ na œcie¿kê wzglêdn¹
-        String jsontoSend = jsonMapper.convertToJson(json, "C:\\Users\\Tyroke\\Desktop\\Semestr 9\\isp\\isp-proj-3\\json_translator\\src\\main\\java\\json_translator\\temp_hum.yml");
-        System.out.println(jsontoSend);
-
-    }
 }

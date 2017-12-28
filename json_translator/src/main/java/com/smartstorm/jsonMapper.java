@@ -3,11 +3,14 @@ package com.smartstorm;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.JSONObject;
 import org.yaml.snakeyaml.Yaml;
+
+import javax.print.DocFlavor;
 
 public class jsonMapper {
 
@@ -38,16 +41,26 @@ public class jsonMapper {
         return content;
     }
 
-    public static String convertToJson(JSONObject json, String yamlString) {
+    public static JSONObject convertToJson(JSONObject json, String yamlString) {
         Yaml yaml = new Yaml();
 
         String yamltext = readFile(yamlString);
         //mapowanie
         Map<String, Object> result = (Map<String, Object>) yaml.load(yamltext);
 
+        String key;
         JSONObject jsonObject = new JSONObject(result);
-        //jsonObject.put("temperaturameasure_value", json.get("temperatura"));
-        return jsonObject.toString();
+        Iterator<?> keys = jsonObject.keys();
+        while(keys.hasNext())
+        {
+            key = (String) keys.next();
+            JSONObject modifiedJson = jsonObject.getJSONObject(key);
+            String field_to_get = modifiedJson.getString("measure_value");
+            String value = json.getString(field_to_get);
+            modifiedJson.put("measure_value", value);
+            jsonObject.put(key,modifiedJson);
+        }
+        return jsonObject;
     }
 
 }
