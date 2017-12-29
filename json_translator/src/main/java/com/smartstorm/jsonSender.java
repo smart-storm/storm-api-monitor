@@ -25,6 +25,12 @@ public class jsonSender {
         httppost = new HttpPost("http://alfa.smartstorm.io/api/v1/measure");
     }
 
+    jsonSender(HttpClient httpClient, HttpPost httpPost)
+    {
+        this.httppost = httpPost;
+        this.httpclient = httpClient;
+    }
+
     public void sendJsons(JSONObject jsonWithMessages) throws IOException {
         Iterator<?> keys = jsonWithMessages.keys();
         String key;
@@ -43,16 +49,15 @@ public class jsonSender {
         //Execute and get the response
         HttpResponse response = httpclient.execute(httppost);
         HttpEntity entity = response.getEntity();
+        InputStream instream = entity.getContent();
+        try {
+            Scanner scanner = new Scanner(instream);
+            scanner.useDelimiter("\\A");
+            String str = scanner.next();
+            System.out.println(str);
 
-        if (entity != null) {
-            InputStream instream = entity.getContent();
-            try {
-                String str = new Scanner(instream).useDelimiter("\\A").next();
-                System.out.println(str);
-
-            } finally {
-                instream.close();
-            }
+        } finally {
+            instream.close();
         }
         }
 }

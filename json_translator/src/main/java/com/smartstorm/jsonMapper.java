@@ -10,8 +10,6 @@ import java.util.logging.Logger;
 import org.json.JSONObject;
 import org.yaml.snakeyaml.Yaml;
 
-import javax.print.DocFlavor;
-
 public class jsonMapper {
 
     jsonMapper() {
