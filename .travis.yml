@@ -1,0 +1,6 @@
+language: java
+sudo: false
+before_script: cd json_translator
+script: mvn clean verify && mvn clean test && mvn jacoco:report
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
