@@ -37,16 +37,17 @@ public class jsonSenderTest {
 
     @Test
     void BasicTest() throws IOException {
-        InputStream is = new ByteArrayInputStream("OK".getBytes());
+        InputStream is = new ByteArrayInputStream("FAKE OK".getBytes());
         when(httpClient.execute(httpPost)).thenReturn(response);
         when(response.getEntity()).thenReturn(entity);
         when(entity.getContent()).thenReturn(is);
 
         jsonSender js = new jsonSender(httpClient, httpPost);
         JSONObject json = new JSONObject();
-        JSONObject json2 = new JSONObject();
-        json.put("test",json2);
-        js.sendJsons(json);
+        json.put("desc","LOL");
+        JSONObject json_container = new JSONObject();
+        json_container.put("desc",json);
+        js.sendJsons(json_container);
     }
 
     @Test

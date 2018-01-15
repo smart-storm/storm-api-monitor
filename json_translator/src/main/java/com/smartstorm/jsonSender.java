@@ -43,7 +43,7 @@ public class jsonSender {
 
 
     private void sendSingleJSON(JSONObject toSend) throws IOException {
-        List<NameValuePair> params = new ArrayList<NameValuePair>(2);
+        System.out.print("Sending " + toSend.getString("desc") +": ");
         httppost.setEntity(new StringEntity(toSend.toString()));
         httppost.setHeader("Content-type","application/json");
         //Execute and get the response
