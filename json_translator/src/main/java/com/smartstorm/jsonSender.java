@@ -41,6 +41,7 @@ public class jsonSender {
         }
     }
 
+    //dodanie autoryzacji
 
     private void sendSingleJSON(JSONObject toSend) throws IOException {
         System.out.print("Sending " + toSend.getString("desc") +": ");

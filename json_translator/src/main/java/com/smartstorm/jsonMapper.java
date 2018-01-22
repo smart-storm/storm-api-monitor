@@ -12,10 +12,8 @@ import org.yaml.snakeyaml.Yaml;
 
 public class jsonMapper {
 
-    jsonMapper() {
 
-    }
-
+    //dodanie uniwersalnosci
     public static String readFile(String filename) {
         String content = null;
         File file = new File(filename); //for ex foo.txt

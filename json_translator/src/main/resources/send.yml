@@ -1,0 +1,5 @@
+## YAML Template.
+send:
+    user_login: t178705@mvrht.net
+    user_password: jakiekolwiekhaslo!123
+    url: http://alfa.smartstorm.io/api/v1/measure
