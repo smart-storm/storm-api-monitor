@@ -15,6 +15,7 @@ public class jsonDownloader {
      * @throws IOException
      * @throws JSONException
      */
+    //dodanie autoryzacji
     public static JSONObject readJsonFromUrl(String url) throws IOException, JSONException {
         URLConnection connection = new URL(url).openConnection();
         connection.setRequestProperty("Accept", "application/json");
