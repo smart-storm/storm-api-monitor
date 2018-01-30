@@ -24,7 +24,7 @@ java -jar target\json_translator-1.0-SNAPSHOT.jar src\main\resources\map_ow_smar
 Sample config files are placed at src/main/resources.
 
 ## System overview
-![System architecture]https://raw.githubusercontent.com/smart-storm/storm-api-monitor/master/readme_media/system.png "System architecture")
+![System architecture](https://raw.githubusercontent.com/smart-storm/storm-api-monitor/master/readme_media/system.png "System architecture")
 
 The system does the following:
 1. Reads the provided donwload.yml config file for an "url" field and builds a GET query string based on the "authentication" field.
