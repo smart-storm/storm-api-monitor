@@ -1,7 +1,0 @@
-## YAML Template.
-url: http://samples.openweathermap.org/data/2.5/weather
-# This fields are intended for authentication, but can be used to add any fields to the request
-authentication:
-    lat: 35
-    lon: 139
-    appid : b6907d289e10d714a6e88b30761fae22
