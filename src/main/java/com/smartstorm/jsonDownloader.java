@@ -1,7 +1,5 @@
 package com.smartstorm;
 
-import org.apache.commons.httpclient.NameValuePair;
-import org.apache.http.client.utils.URLEncodedUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -9,10 +7,7 @@ import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 public class jsonDownloader {
 
@@ -22,7 +17,6 @@ public class jsonDownloader {
      * @throws IOException
      * @throws JSONException
      */
-    //dodanie autoryzacji
     public static JSONObject readJsonFromUrl(String url) throws IOException, JSONException {
         URLConnection connection = new URL(url).openConnection();
         connection.setRequestProperty("Accept", "application/json");

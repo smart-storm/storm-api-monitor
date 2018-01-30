@@ -1,16 +1,8 @@
 package com.smartstorm;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.json.JSONObject;
-import org.yaml.snakeyaml.Yaml;
+
+import java.util.Iterator;
 
 public class jsonMapper {
     public static JSONObject convertJson(JSONObject json, String filename) {

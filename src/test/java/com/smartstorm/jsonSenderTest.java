@@ -1,19 +1,12 @@
 package com.smartstorm;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpVersion;
-import org.apache.http.StatusLine;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.BasicHttpEntity;
 import org.apache.http.message.BasicHttpResponse;
-import org.apache.http.message.BasicStatusLine;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.platform.runner.JUnitPlatform;
-import org.junit.runner.RunWith;
 import org.mockito.Mock;
 
 import java.io.ByteArrayInputStream;
@@ -53,7 +46,9 @@ public class jsonSenderTest {
     @Test
     void BasicConstructor()
     {
-        jsonSender js = new jsonSender(new JSONObject());
+        JSONObject json = new JSONObject();
+        json.put("url", "http://example.org");
+        jsonSender js = new jsonSender(json);
         assertNotNull(js);
     }
 }

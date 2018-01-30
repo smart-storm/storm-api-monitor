@@ -2,13 +2,9 @@ package com.smartstorm;
 
 import org.json.JSONObject;
 import org.junit.Test;
-import org.junit.platform.runner.JUnitPlatform;
-import org.junit.runner.RunWith;
-import com.smartstorm.jsonMapper;
 
 import static junit.framework.TestCase.assertTrue;
 
-@RunWith(JUnitPlatform.class)
 public class jsonMapperTest {
     @Test
     public void getNestedValueTest()
