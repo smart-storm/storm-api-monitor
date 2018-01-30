@@ -1,4 +1,8 @@
 ## YAML Template.
+
+# The field name which will be mapped
+mapping: measure_value
+
 temperatura:
     user_id: t178705@mvrht.net
     sensor_id: 5a45771b2c2a5166534a2719

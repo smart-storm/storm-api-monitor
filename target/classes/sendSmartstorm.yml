@@ -1,0 +1,2 @@
+# The URL to which the post request will be issued
+url: http://alfa.smartstorm.io/api/v1/measure

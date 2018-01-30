@@ -3,6 +3,8 @@ package com.smartstorm;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.logging.Level;
@@ -11,52 +13,37 @@ import org.json.JSONObject;
 import org.yaml.snakeyaml.Yaml;
 
 public class jsonMapper {
-
-
-    //dodanie uniwersalnosci
-    public static String readFile(String filename) {
-        String content = null;
-        File file = new File(filename); //for ex foo.txt
-        FileReader reader = null;
-        try {
-            reader = new FileReader(file);
-            char[] chars = new char[(int) file.length()];
-            reader.read(chars);
-            content = new String(chars);
-            reader.close();
-        } catch (IOException e) {
-        } finally {
-            if (reader != null) {
-                try {
-                    reader.close();
-                } catch (IOException ex) {
-                    Logger.getLogger(jsonMapper.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }
-        return content;
-    }
-
-    public static JSONObject convertToJson(JSONObject json, String yamlString) {
-        Yaml yaml = new Yaml();
-
-        String yamltext = readFile(yamlString);
-        //mapowanie
-        Map<String, Object> result = (Map<String, Object>) yaml.load(yamltext);
-
+    public static JSONObject convertJson(JSONObject json, String filename) {
         String key;
-        JSONObject jsonObject = new JSONObject(result);
-        Iterator<?> keys = jsonObject.keys();
+        String key_to_map;
+        JSONObject mappingJSON = YamlReaderToJSON.getJSONfromYAMLfile(filename);
+        key_to_map = mappingJSON.getString("mapping");
+        mappingJSON.remove("mapping");
+        Iterator<?> keys = mappingJSON.keys();
         while(keys.hasNext())
         {
             key = (String) keys.next();
-            JSONObject modifiedJson = jsonObject.getJSONObject(key);
-            String field_to_get = modifiedJson.getString("measure_value");
-            String value = json.getString(field_to_get);
-            modifiedJson.put("measure_value", value);
-            jsonObject.put(key,modifiedJson);
+            JSONObject modifiedJson = mappingJSON.getJSONObject(key);
+            String field_to_get = modifiedJson.getString(key_to_map);
+            String value = getNestedValue(field_to_get, json);
+            modifiedJson.put(key_to_map, value);
+            mappingJSON.put(key,modifiedJson);
         }
-        return jsonObject;
+        return mappingJSON;
     }
+
+    public static String getNestedValue(String key, JSONObject json)
+    {
+        JSONObject inner = json;
+        String[] keys = key.split("\\.");
+        int i = 0;
+        while(i < keys.length - 1)
+        {
+            inner = inner.getJSONObject(keys[i]);
+            i++;
+        }
+        return String.valueOf(inner.get(keys[keys.length - 1]));
+    }
+
 
 }

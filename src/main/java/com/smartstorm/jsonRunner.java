@@ -8,15 +8,15 @@ import static com.smartstorm.jsonDownloader.*;
 
 public class jsonRunner {
     public static void main(String[] args) throws IOException {
-        //zmienic argumenty na czytanie z pliku konfiguracyjnego w src/main/resources
-        if (args.length < 2) {
-            System.out.println("Required arguments: url_to_connect config_yaml_full_path");
+        if (args.length < 3) {
+            System.out.println("Required arguments: mapping_yaml download_yaml upload_yaml");
             System.exit(0);
         }
-        JSONObject jsonObject =
-                readJsonFromUrl(args[0]);
-        jsonObject = jsonMapper.convertToJson(jsonObject, args[1]);
-        jsonSender sender = new jsonSender();
-        sender.sendJsons(jsonObject);
+        JSONObject downloadConfig = YamlReaderToJSON.getJSONfromYAMLfile(args[1]);
+        JSONObject dataReceived = readConfigAndReturnData(downloadConfig);
+        JSONObject dataToSend = jsonMapper.convertJson(dataReceived, args[0]);
+        JSONObject senderConfig = YamlReaderToJSON.getJSONfromYAMLfile(args[2]);
+        jsonSender sender = new jsonSender(senderConfig);
+        sender.sendJsons(dataToSend);
     }
 }

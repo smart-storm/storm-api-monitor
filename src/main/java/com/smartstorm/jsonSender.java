@@ -19,10 +19,11 @@ import java.util.Scanner;
 public class jsonSender {
     private HttpClient httpclient;
     private HttpPost httppost;
+    private JSONObject senderConfig;
 
-    jsonSender() {
+    jsonSender(JSONObject senderConfig) {
         httpclient = HttpClients.createDefault();
-        httppost = new HttpPost("http://alfa.smartstorm.io/api/v1/measure");
+        httppost = new HttpPost(senderConfig.getString("url"));
     }
 
     jsonSender(HttpClient httpClient, HttpPost httpPost)
@@ -37,14 +38,14 @@ public class jsonSender {
         while (keys.hasNext()) {
             key = (String) keys.next();
             JSONObject singleJson = jsonWithMessages.getJSONObject(key);
-            sendSingleJSON(singleJson);
+            sendSingleJSON(singleJson, key);
         }
     }
 
     //dodanie autoryzacji
 
-    private void sendSingleJSON(JSONObject toSend) throws IOException {
-        System.out.print("Sending " + toSend.getString("desc") +": ");
+    private void sendSingleJSON(JSONObject toSend, String key) throws IOException {
+        System.out.print("Sending " + key +": ");
         httppost.setEntity(new StringEntity(toSend.toString()));
         httppost.setHeader("Content-type","application/json");
         //Execute and get the response

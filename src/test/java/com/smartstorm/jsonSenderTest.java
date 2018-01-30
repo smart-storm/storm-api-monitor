@@ -53,7 +53,7 @@ public class jsonSenderTest {
     @Test
     void BasicConstructor()
     {
-        jsonSender js = new jsonSender();
+        jsonSender js = new jsonSender(new JSONObject());
         assertNotNull(js);
     }
 }

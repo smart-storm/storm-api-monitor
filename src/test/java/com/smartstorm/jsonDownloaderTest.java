@@ -16,10 +16,4 @@ class jsonDownloaderTest {
     void checkWrongAddress() {
         assertThrows(IOException.class, ()->jsonDownloader.readJsonFromUrl("WRONG"));
     }
-
-    @Test
-    void addressOK() {
-
-    }
-
 }

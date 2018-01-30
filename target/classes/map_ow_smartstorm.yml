@@ -1,0 +1,15 @@
+## YAML Template.
+
+# The field name which will be mapped
+mapping: measure_value
+
+temperatura:
+    user_id: t178705@mvrht.net
+    sensor_id: 5a45771b2c2a5166534a2719
+    desc: temperatura
+    measure_value: main.temp
+wilgotnosc:
+    user_id: t178705@mvrht.net
+    sensor_id: 5a4577262c2a5166534a271a
+    desc: wilgotnosc
+    measure_value: main.humidity

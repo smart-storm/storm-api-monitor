@@ -1,0 +1,6 @@
+## YAML Template.
+url: https://danepubliczne.imgw.pl/api/data/synop/station/gdansk
+# No authentication, so field ommited
+#authentication:
+#    user_login: login
+#    user_password: password
